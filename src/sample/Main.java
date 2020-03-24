@@ -1,28 +1,34 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class Main extends Application  {
 
-    Button myButton;
+    Stage window;
+    Button button;
+
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        primaryStage.setTitle("Title of the Window");
+        window = primaryStage;
+        window.setTitle("Nowy guzik");
 
-        myButton = new Button();
-        myButton.setText("Click me");
+        button = new Button("Kliknij mnie");
+        button.setOnAction(e -> AlertBox.display("Tytuł", "Wiadomość ostrzeżenia"));
 
         StackPane layout = new StackPane();
-        layout.getChildren().add(myButton);
-
+        layout.getChildren().add(button);
         Scene scene = new Scene(layout, 300, 250);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        window.setScene(scene);
+        window.show();
 
     }
 
@@ -30,4 +36,6 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
+
 }
