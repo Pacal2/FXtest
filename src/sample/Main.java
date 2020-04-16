@@ -30,7 +30,6 @@ public class Main extends Application  {
     public void start(Stage primaryStage) throws Exception{
         window = primaryStage;
         window.setTitle("Java FX");
-        button = new Button("Kliknij mnie");
 
         /* Używanie choiceBox
         //ChoiceBox
@@ -132,6 +131,7 @@ public class Main extends Application  {
         hBox.getChildren().addAll(nameInput, releaseYearInput, issuesInput, addButton, deleteButton);
         */
 
+        /*
         //File menu
         Menu fileMenu = new Menu("File");
 
@@ -167,6 +167,7 @@ public class Main extends Application  {
                 System.out.println("Hiding line numbers");
             }
         });
+
         CheckMenuItem autoSave = new CheckMenuItem("Enable auto-save");
         autoSave.setSelected(true);
         helpMenu.getItems().addAll(showLines, autoSave);
@@ -189,16 +190,66 @@ public class Main extends Application  {
         MenuBar menuBar = new MenuBar();
         menuBar.getMenus().addAll(fileMenu, editMenu, helpMenu, difficultyMenu);
 
+        */
+
+        /* Label and inputs
+        //GridPane with 10px padding around edge
+        GridPane grid = new GridPane();
+        grid.setPadding(new Insets(10, 10, 10, 10));
+        grid.setVgap(8);
+        grid.setHgap(10);
+
+        //Name Label - constrains use (child, column, row)
+        Label nameLabel = new Label("Użytkownik:");
+        nameLabel.setId("bold-label");
+        GridPane.setConstraints(nameLabel, 0, 0);
+
+        //Name Input
+        TextField nameInput = new TextField("Pacal");
+        GridPane.setConstraints(nameInput, 1, 0);
+
+        //Password Label
+        Label passLabel = new Label("Hasło:");
+        GridPane.setConstraints(passLabel, 0, 1);
+
+        //Password Input
+        TextField passInput = new TextField();
+        passInput.setPromptText("hasło");
+        GridPane.setConstraints(passInput, 1, 1);
+
+        //Login
+        Button loginButton = new Button("Zaloguj");
+        GridPane.setConstraints(loginButton, 1, 2);
+
+        //Login
+        Button signUpButton = new Button("Zapisz się");
+        signUpButton.getStyleClass().add("button-blue");
+        GridPane.setConstraints(signUpButton, 1, 3);
+
+        //Add everything to grid
+        grid.getChildren().addAll(nameLabel, nameInput, passLabel, passInput, loginButton, signUpButton);
 
 
+         */
 
+        Person pacal = new Person();
 
-        //Layout
-        layout = new BorderPane();
-        layout.setTop(menuBar);
-        Scene scene = new Scene(layout, 400, 400);
+        pacal.firstNameProperty().addListener((v, oldValue, newValue) -> {
+            System.out.println("Name changed to " + newValue);
+            System.out.println("firstNameProperty(): " + pacal.firstNameProperty());
+            System.out.println("getFirstName(): " + pacal.getFirstName());
+        });
+
+        button = new Button("Potwierdź");
+        button.setOnAction(e -> pacal.setFirstName("Porky"));
+
+        StackPane layout = new StackPane();
+        layout.getChildren().add(button);
+        Scene scene = new Scene(layout, 300, 200);
+        scene.getStylesheets().add("Theme.css");
         window.setScene(scene);
         window.show();
+
 
     }
 
@@ -221,8 +272,6 @@ public class Main extends Application  {
 
         comicsSelected.forEach(allComics::remove);
     }
-
-
 
     private ObservableList<Comics> getComics() {
         ObservableList<Comics> comics = FXCollections.observableArrayList();
