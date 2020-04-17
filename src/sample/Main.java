@@ -1,11 +1,16 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -28,6 +33,7 @@ public class Main extends Application  {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         window = primaryStage;
         window.setTitle("Java FX");
 
@@ -232,6 +238,7 @@ public class Main extends Application  {
 
          */
 
+        /* Properties
         Person pacal = new Person();
 
         pacal.firstNameProperty().addListener((v, oldValue, newValue) -> {
@@ -242,10 +249,26 @@ public class Main extends Application  {
 
         button = new Button("Potwierdź");
         button.setOnAction(e -> pacal.setFirstName("Porky"));
-
         StackPane layout = new StackPane();
         layout.getChildren().add(button);
-        Scene scene = new Scene(layout, 300, 200);
+        */
+
+        /* Binding
+        TextField userInput = new TextField();
+        userInput.setMaxWidth(200);
+        Label firstLabel = new Label("Witaj na stronie");
+        Label seconLabel = new Label();
+
+        HBox bottomText = new HBox(firstLabel, seconLabel);
+        bottomText.setAlignment(Pos.CENTER);
+
+        VBox vBox = new VBox(10, userInput, bottomText);
+        vBox.setAlignment(Pos.CENTER);
+
+        seconLabel.textProperty().bind(userInput.textProperty());
+        */
+
+        Scene scene = new Scene(root, 300, 200);
         scene.getStylesheets().add("Theme.css");
         window.setScene(scene);
         window.show();
