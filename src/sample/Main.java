@@ -268,7 +268,7 @@ public class Main extends Application  {
         seconLabel.textProperty().bind(userInput.textProperty());
         */
 
-        Scene scene = new Scene(root, 300, 200);
+        Scene scene = new Scene(root, 800, 500);
         scene.getStylesheets().add("Theme.css");
         window.setScene(scene);
         window.show();

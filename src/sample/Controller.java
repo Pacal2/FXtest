@@ -1,15 +1,15 @@
 package sample;
 
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
-public class Controller {
+import java.net.URL;
+import java.util.ResourceBundle;
 
-    public Button button;
+public class Controller{
 
-    public void handleButtonClick() {
-        System.out.println("Run some code");
-        button.setText("Click");
+
+    public void loginButtonClicked() {
+        System.out.println("User logged in");
     }
-
-
 }
